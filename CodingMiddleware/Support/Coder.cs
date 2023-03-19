@@ -2,25 +2,29 @@
 
 namespace CodingMiddleware.Support
 {
+    //TODELETE
     abstract public class Coder
     {
-        /// <summary>
-        /// Массив кодов элементов
-        /// </summary>
-        protected OneElementCode[] _arCode;
-
-        public OneElementCode[] ArCode
-        {
-            get
-            {
-                return _arCode;
-            }
-        }
-
         private const int BITS_IN_BYTE = 8;
         private const int MAX_BYTE_VALUE = 255;
 
-        public abstract void GetCode(ProbabilityMatrix probabilityMatrix);
+        /// <summary>
+        /// Массив кодов элементов
+        /// </summary>
+        protected OneElementCode[] arCode = null!;
+
+        //public OneElementCode[] ArCode
+        //{
+        //    get
+        //    {
+        //        return _arCode;
+        //    }
+        //}
+
+        //private const int BITS_IN_BYTE = 8;
+        //private const int MAX_BYTE_VALUE = 255;
+
+        //public abstract void GetCode(ProbabilityMatrix probabilityMatrix);
 
         /// <summary>
         /// Функция кодирования массива данных
@@ -28,7 +32,7 @@ namespace CodingMiddleware.Support
         /// <param name="data">Массив первичных данных</param>
         /// <param name="code">Кодовая таблица</param>
         /// <param name="codeData">Массив кодированных данных</param>
-        public static void CodeData(Data data, Coder code, Data codeData)
+        public void CodeData(Data data, Coder code, Data codeData)
         {
             OneElementCode elementCode;
             UInt64 tempCodeSequence = 0;
@@ -59,7 +63,7 @@ namespace CodingMiddleware.Support
 
         private OneElementCode GetElementCode(byte symbol)
         {
-            return _arCode[Array.FindIndex<OneElementCode>(_arCode, code =>
+            return arCode[Array.FindIndex<OneElementCode>(arCode, code =>
                     code.Element == symbol)];
         }
     }
