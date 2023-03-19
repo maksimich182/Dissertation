@@ -32,15 +32,15 @@ namespace CodingMiddleware.Support
         /// <param name="data">Массив первичных данных</param>
         /// <param name="code">Кодовая таблица</param>
         /// <param name="codeData">Массив кодированных данных</param>
-        public void CodeData(Data data, Coder code, Data codeData)
+        public byte[] CodeData(byte[] data, Coder code)
         {
             OneElementCode elementCode;
             UInt64 tempCodeSequence = 0;
             int currentTempCodeLength = 0;
             byte byteMask = Convert.ToByte(MAX_BYTE_VALUE);
-            List<byte> currentCodeData = new List<byte>();
+            var currentCodeData = new List<byte>();
 
-            foreach (var element in data.ArData)
+            foreach (var element in data)
             {
                 elementCode = code.GetElementCode(element);
                 tempCodeSequence |= elementCode.Code << currentTempCodeLength;
@@ -58,7 +58,7 @@ namespace CodingMiddleware.Support
                 currentCodeData.Add(Convert.ToByte(tempCodeSequence));
             }
 
-            codeData.ArData = currentCodeData.ToArray();
+            return currentCodeData.ToArray();
         }
 
         private OneElementCode GetElementCode(byte symbol)

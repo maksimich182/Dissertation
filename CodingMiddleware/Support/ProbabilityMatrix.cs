@@ -30,16 +30,16 @@ namespace CodingMiddleware.Support
             }
         }
 
-        public void GetSortProbabilityMatrix(Data data)
+        public void GetSortProbabilityMatrix(byte[] data)
         {
             CalculateFrequancy(data);
             SortFrequency();
             ReduceZeroProbMatrix();
         }
 
-        public void CalculateFrequancy(Data data)
+        public void CalculateFrequancy(byte[] data)
         {
-            foreach (var element in data.ArData)
+            foreach (var element in data)
             {
                 _probabilities[element].Probability++;
             }
@@ -47,7 +47,7 @@ namespace CodingMiddleware.Support
             {
 
                 _probabilities[i].DataByte = Convert.ToByte(i);
-                _probabilities[i].Probability = _probabilities[i].Probability / data.ArData.Length;
+                _probabilities[i].Probability = _probabilities[i].Probability / data.Length;
             }
         }
 
